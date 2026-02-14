@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Love Game ❤️</title>
+
+<style>
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  min-height:100vh;
+  background:linear-gradient(to bottom,#ff4d6d,#ffb3c6);
+  font-family:Poppins,sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.card{
+  background:#fff;
+  width:90%;
+  max-width:420px;
+  padding:22px;
+  border-radius:25px;
+  text-align:center;
+  box-shadow:0 20px 40px rgba(0,0,0,.3);
+}
+
+h2{color:#ff4d6d;}
+
+#gameBox{
+  position:relative;
+  height:260px;
+  background:#ffe0e8;
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:15px;
+  cursor:pointer;
+}
+
+.heart{
+  position:absolute;
+  font-size:28px;
+  cursor:pointer;
+  animation:rise 3s linear forwards;
+}
+
+@keyframes rise{
+  from{bottom:-40px;}
+  to{bottom:100%;}
+}
+
+#score{
+  margin-top:12px;
+  font-weight:600;
+  color:#ff4d6d;
+}
+
+button{
+  margin-top:10px;
+  padding:12px;
+  width:100%;
+  border:none;
+  border-radius:25px;
+  background:#ff4d6d;
+  color:#fff;
+  font-size:15px;
+  cursor:pointer;
+}
+
+.alt{
+  background:#ff8fab;
+}
+
+.next{
+  background:#ff2e63;
+}
+
+#winBox{
+  display:none;
+  margin-top:15px;
+  animation:fade 1s ease;
+}
+
+@keyframes fade{
+  from{opacity:0;transform:translateY(30px);}
+  to{opacity:1;transform:translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h2>❤️ Catch The Hearts</h2>
+  <p>Catch <b>5 hearts</b> to unlock your gift 🎁</p>
+
+  <div id="gameBox"></div>
+  <div id="score">0 / 5</div>
+
+  <button id="startBtn" onclick="startGame()">Start Game 🎮</button>
+
+  <!-- WIN SCREEN -->
+  <div id="winBox">
+    <h3>🎉 Hurrah!</h3>
+    <p>
+      You played really well ❤️<br>
+      What do you want to do now?
+    </p>
+
+    <button onclick="startGame()">Restart Game 🔁</button>
+    <button class="alt" onclick="startGame()">Play Again 💕</button>
+    <button class="next" onclick="goNext()">See Your Gift 🎁</button>
+  </div>
+</div>
+
+<!-- Background Music -->
+<audio id="bgMusic" src="roshni.mp4" loop></audio>
+
+<script>
+let score = 0;
+let gameInterval;
+const music = document.getElementById("bgMusic");
+const gameBox = document.getElementById("gameBox");
+
+// --- TOUCH TO SEE FEELINGS MINI GAME ---
+let touchCount = 0;
+gameBox.addEventListener("click", handleTouchGame);
+
+function handleTouchGame(e){
+  touchCount++;
+  
+  if(touchCount <= 3){
+    // Shake animation
+    gameBox.style.transition = "transform 0.15s";
+    gameBox.style.transform = "translateX(-10px)";
+    setTimeout(()=> gameBox.style.transform = "translateX(10px)", 75);
+    setTimeout(()=> gameBox.style.transform = "translateX(0px)", 150);
+  }
+
+  if(touchCount === 4){
+    alert("💌 Hey! I wanted to tell you something special…\n\nYou are my most beautiful feeling ❤️");
+    gameBox.removeEventListener("click", handleTouchGame);
+  }
+}
+
+// --- GAME LOGIC ---
+function startGame(){
+  clearInterval(gameInterval);
+  score = 0;
+  document.getElementById("score").innerText="0 / 5";
+  document.getElementById("winBox").style.display="none";
+  gameBox.innerHTML="";
+  document.getElementById("startBtn").style.display="none";
+
+  music.currentTime = 0;
+  music.volume = 0.6;
+  music.play();
+
+  gameInterval = setInterval(createHeart,700);
+}
+
+function createHeart(){
+  const heart = document.createElement("div");
+  heart.className="heart";
+  heart.innerHTML="❤️";
+  heart.style.left = Math.random()*85 + "%";
+
+  heart.onclick = ()=>{
+    heart.remove();
+    score++;
+    document.getElementById("score").innerText = score+" / 5";
+    if(score === 5) endGame();
+  };
+
+  gameBox.appendChild(heart);
+  setTimeout(()=>heart.remove(),3000);
+}
+
+function endGame(){
+  clearInterval(gameInterval);
+  music.pause();
+  document.getElementById("winBox").style.display="block";
+  document.getElementById("startBtn").style.display="block";
+  document.getElementById("startBtn").innerText="Play Again 💖";
+}
+
+function goNext(){
+  window.location.href="page7.html";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Little Love Game ❤️</title>
+
+<style>
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  min-height:100vh;
+  background:linear-gradient(to bottom,#ff4d6d,#ffb3c6);
+  font-family:'Poppins',sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.card{
+  background:#fff;
+  width:92%;
+  max-width:420px;
+  padding:25px;
+  border-radius:25px;
+  text-align:center;
+  box-shadow:0 25px 45px rgba(0,0,0,.35);
+}
+h2{color:#ff4d6d;}
+.choices{
+  margin-top:15px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.choice{
+  padding:12px;
+  background:#ffe0e8;
+  border-radius:18px;
+  cursor:pointer;
+  font-weight:600;
+}
+.choice:hover{
+  background:#ff4d6d;
+  color:#fff;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h2>❤️ Little Love Game</h2>
+  <p><strong>Question:</strong><br>
+  Who misses you the most right now?</p>
+
+  <div class="choices">
+    <div class="choice" onclick="wrong()">Someone Else</div>
+    <div class="choice" onclick="goNext()">Me 🥺</div>
+    <div class="choice" onclick="wrong()">Nobody</div>
+    <div class="choice" onclick="wrong()">Everyone</div>
+  </div>
+</div>
+
+<script>
+function wrong(){
+  alert("Nope 😅 Think again with your heart ❤️");
+}
+
+function goNext(){
+  // WRONG ANSWER PAGE
+  window.location.href="page4.html";
+}
+</script>
+
+</body>
+</html>

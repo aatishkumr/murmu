@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>One Last Thing ❤️</title>
+
+<style>
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  min-height:100vh;
+  background:linear-gradient(to bottom,#ff4d6d,#ffb3c6);
+  font-family:'Poppins',sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.card{
+  background:#fff;
+  width:92%;
+  max-width:420px;
+  padding:25px;
+  border-radius:25px;
+  text-align:center;
+  box-shadow:0 25px 45px rgba(0,0,0,.35);
+  animation:fade 1s ease;
+}
+@keyframes fade{
+  from{opacity:0;transform:translateY(40px);}
+  to{opacity:1;transform:translateY(0);}
+}
+h2{color:#ff4d6d;}
+button{
+  margin-top:15px;
+  padding:12px 24px;
+  background:#ff4d6d;
+  color:#fff;
+  border:none;
+  border-radius:25px;
+  font-size:16px;
+  cursor:pointer;
+}
+video{
+  width:100%;
+  margin-top:15px;
+  border-radius:18px;
+  display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h2>❤️ One Last Question</h2>
+
+  <p>
+    Do you want to hear<br>
+    what he really wants to say to you? 🥹❤️
+  </p>
+
+  <button onclick="playVideo()">Yes… I want to hear 💕</button>
+
+  <video id="finalVid" controls>
+    <source src="chuchu.MP4" type="video/mp4">
+  </video>
+</div>
+
+<script>
+function playVideo(){
+  const v = document.getElementById("finalVid");
+  v.style.display = "block";
+  v.play();
+
+  // Redirect after video ends
+  v.onended = function() {
+    window.location.href = "page6.html"; // <-- Replace with your Page 7 file
+  };
+}
+</script>
+
+</body>
+</html>

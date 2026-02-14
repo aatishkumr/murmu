@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Valentine ❤️</title>
+
+<style>
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  height:100vh;
+  background:linear-gradient(to top,#ff4d6d,#ffb3c6);
+  font-family:'Poppins',sans-serif;
+  overflow:hidden;
+}
+
+/* BACKGROUND TEXT */
+.bg-text{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  color:rgba(255,255,255,0.25);
+  font-weight:900;
+  pointer-events:none;
+}
+.bg-text span{font-size:60px;}
+.bg-text div{font-size:36px;}
+
+/* FLOATING HEARTS */
+.hearts span{
+  position:absolute;
+  bottom:-20px;
+  color:rgba(255,255,255,0.8);
+  animation:floatHearts 8s linear infinite;
+}
+@keyframes floatHearts{
+  0%{transform:translateY(0) scale(1);opacity:1;}
+  100%{transform:translateY(-100vh) scale(1.6);opacity:0;}
+}
+
+/* BALLOONS */
+.container{position:relative;width:100%;height:100%;}
+.balloon{
+  width:120px;height:150px;
+  background:radial-gradient(circle at 30% 30%,#fff,transparent),
+             linear-gradient(to bottom,#ff4d6d,#ff8fa3);
+  border-radius:50%;
+  position:absolute;
+  cursor:pointer;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:30px;
+  box-shadow:0 15px 30px rgba(0,0,0,.3);
+  animation:float 4s ease-in-out infinite;
+}
+.balloon::after{
+  content:"";position:absolute;width:2px;height:60px;
+  background:white;bottom:-60px;
+}
+@keyframes float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-25px);}
+}
+
+/* POP EFFECT */
+.pop{animation:popEffect .4s ease-out forwards;}
+@keyframes popEffect{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.3);}
+  100%{transform:scale(0);opacity:0;}
+}
+
+/* POPUP */
+.popup{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.7);
+  display:none;justify-content:center;align-items:center;
+  z-index:10;
+}
+.popup-content{
+  background:white;padding:20px;border-radius:15px;
+  max-width:320px;text-align:center;
+  animation:popupEnter .6s ease;
+}
+@keyframes popupEnter{
+  0%{transform:scale(.7);opacity:0;}
+  60%{transform:scale(1.05);}
+  100%{transform:scale(1);opacity:1;}
+}
+.popup-content img{width:100%;border-radius:10px;margin-top:10px;}
+.close{
+  margin-top:10px;padding:8px 15px;
+  background:#ff4d6d;color:white;
+  border:none;border-radius:8px;cursor:pointer;
+}
+
+/* NEXT BUTTON */
+.next-btn{
+  margin-top:15px;
+  padding:10px 20px;
+  background:#ff4d6d;
+  color:white;
+  border:none;
+  border-radius:20px;
+  font-size:16px;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND TEXT -->
+<div class="bg-text">
+  <span>HAPPY VALENTINE DAY</span>
+  <div>MY BABY 💕</div>
+  <div>MY CHIKUU 🧸</div>
+  <div>MY SWEETHEART ❤️</div>
+</div>
+
+<!-- FLOATING HEARTS -->
+<div class="hearts"></div>
+
+<!-- BALLOONS -->
+<div class="container">
+  <div class="balloon" style="left:10%;top:65%" onclick="popBalloon(1,this)">💖</div>
+  <div class="balloon" style="left:30%;top:40%" onclick="popBalloon(2,this)">💕</div>
+  <div class="balloon" style="left:50%;top:70%" onclick="popBalloon(3,this)">🧸</div>
+  <div class="balloon" style="left:70%;top:45%" onclick="popBalloon(4,this)">❤️</div>
+  <div class="balloon" style="left:45%;top:20%" onclick="popBalloon(5,this)">💍</div>
+</div>
+
+<!-- NORMAL POPUP -->
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <h2 id="popupText"></h2>
+    <img id="popupImg">
+    <button class="close" onclick="closePopup()">Close ❤️</button>
+  </div>
+</div>
+
+<!-- FINAL POPUP -->
+<div class="popup" id="finalPopup">
+  <div class="popup-content">
+    <h2>🎉 You got all balloons!</h2>
+    <p>
+      Every balloon had my feelings for you ❤️<br><br>
+      Ready for the next surprise? 💕
+    </p>
+    <button class="next-btn" onclick="goNextPage()">Go to Page Two ❤️</button>
+  </div>
+</div>
+
+<!-- SOUNDS -->
+<audio id="popSound" src="sounds/pop.mp3"></audio>
+<audio id="loveSong" src="sikkhe.mp3" loop></audio> <!-- SONG LOOP -->
+
+<script>
+/* FLOATING HEARTS */
+const heartsContainer=document.querySelector('.hearts');
+setInterval(()=>{
+  const heart=document.createElement('span');
+  heart.innerHTML='❤️';
+  heart.style.left=Math.random()*100+'vw';
+  heart.style.fontSize=15+Math.random()*25+'px';
+  heartsContainer.appendChild(heart);
+  setTimeout(()=>heart.remove(),8000);
+},400);
+
+/* BALLOON MESSAGES AND IMAGES */
+const messages={
+  1:"You are my sweetest blessing 💖",
+  2:"Your smile makes my world beautiful 💕",
+  3:"My comfort & peace 🧸",
+  4:"You are my lowkey ❤️",
+  5:"Happy Valentine My Chikuu 💍❤️"
+};
+const imageMap={
+  1:"blessing.jpg",
+  2:"smile.jpg",
+  3:"comfort.jpg",
+  4:"lowkey.jpg",
+  5:"cute.jpg"
+};
+
+let poppedCount = 0;
+const totalBalloons = 5;
+
+function popBalloon(num,balloon){
+  document.getElementById("popSound").play();
+
+  // Play love song automatically on first balloon if not already playing
+  const song = document.getElementById("loveSong");
+  if(song.paused){
+    song.volume = 0.6;
+    song.play().catch(()=>{console.log("Autoplay blocked");});
+  }
+
+  balloon.classList.add("pop");
+  setTimeout(()=>balloon.style.display="none",400);
+
+  document.getElementById("popupText").innerText=messages[num];
+  document.getElementById("popupImg").src=imageMap[num];
+  document.getElementById("popup").style.display="flex";
+
+  poppedCount++;
+  if(poppedCount === totalBalloons){
+    setTimeout(()=>{
+      document.getElementById("popup").style.display="none";
+      document.getElementById("finalPopup").style.display="flex";
+    },800);
+  }
+}
+
+function closePopup(){
+  document.getElementById("popup").style.display="none";
+}
+
+function goNextPage(){
+  window.location.href="page2.html";
+}
+
+/* ❤️ AUTOPLAY SONG ON FIRST INTERACTION (WORKS ON MOBILE/DESKTOP) */
+window.addEventListener('click', () => {
+  const song = document.getElementById("loveSong");
+  if(song.paused){
+    song.volume = 0.6;
+    song.play().catch(()=>console.log("Autoplay blocked"));
+  }
+}, {once:true}); // ensures it triggers only once
+</script>
+
+</body>
+</html>

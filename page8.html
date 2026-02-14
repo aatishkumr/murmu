@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Page 8 - 20 Reasons ❤️</title>
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Georgia', serif;
+  background: linear-gradient(to bottom, #ffe6e6, #ffccd5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#askBox {
+  width: 380px;
+  padding: 20px;
+  background: rgba(255, 204, 213, 0.95);
+  color: #b33a6c;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 15px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background 0.3s, transform 0.2s;
+}
+#askBox:hover { background: rgba(255, 204, 213,1); transform: scale(1.05); }
+
+#reasons {
+  max-width: 90%;
+  background: #fff7f0;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.2);
+  text-align: left;
+  font-size: 20px;
+  line-height: 2;
+  color: #4b2e2e;
+  display: none;
+}
+
+.reason {
+  opacity: 0;
+  margin-bottom: 10px;
+  transition: opacity 0.6s ease-in-out;
+}
+
+#nextBtn {
+  margin-top: 20px;
+  padding: 12px 25px;
+  font-size: 18px;
+  border: none;
+  border-radius: 15px;
+  background: #ff4d6d;
+  color: white;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+#nextBtn:hover {
+  background: #e60044;
+}
+</style>
+</head>
+<body>
+
+<div id="askBox">Do you want to know why I like you? 😏</div>
+
+<div id="reasons"></div>
+
+<button id="nextBtn">Next ❤️</button>
+
+<!-- Audio -->
+<audio id="loveSong" src="baby.mp3.mp4" loop></audio>
+
+<script>
+// Personalized numbered reasons
+const reasons = [
+  "Kabhi kabhi reasons numbers me explain nahi hote… phir bhi agar aapne poocha hai ki main aapko kyun like karta hoon, toh yeh sirf 20 reasons nahi, balki woh ehsaas hain jo har roz thode aur gehre ho jaate hain…",
+  "1. Mujhe aapki simplicity pasand hai — bina dikhave ke jo aap hain, wahi rehna.",
+  "2. Aapki baaton me ek sukoon hota hai jo shor bhari duniya me bhi chain de deta hai.",
+  "3. Aapka care karne ka tareeka — bina bole samajh jaana.",
+  "4. Aapki smile… jo mood nahi, din tak badal deti hai.",
+  "5. Aapka strong hona, chahe andar se kitna bhi soft kyun na ho.",
+  "6. Aapka respect dena — chhoti chhoti cheezon me bhi.",
+  "7. Aapki honesty, jo rare hai.",
+  "8. Aapka apno ke liye effort karna.",
+  "9. Aapki presence… jo bas hone se hi sab better kar deti hai.",
+  "10. Aapka mujhe meri hi nazron me better bana dena.",
+  "11. Aapka patience.",
+  "12. Aapka sense of understanding.",
+  "13. Aapka grounded rehna — success ho ya struggle.",
+  "14. Aapki emotional depth.",
+  "15. Aapka real hona — bina mask ke.",
+  "16. Aapka sapne dekhna aur unke liye ladna.",
+  "17. Aapka mujhe sunna — sirf jawab dene ke liye nahi, samajhne ke liye.",
+  "18. Aapki loyalty.",
+  "19. Aapka woh silent support jo shabdon se zyada powerful hota hai.",
+  "20. Aur sabse zyada — aapka “aap hona”.",
+  "Sach kahun toh, main aapko kisi ek wajah se like nahi karta… Main aapko isliye like karta hoon kyunki aap meri zindagi me ek feeling ban chuke hain — aur feelings reasons se nahi, ehsaason se banti hain."
+];
+
+const askBox = document.getElementById('askBox');
+const reasonsDiv = document.getElementById('reasons');
+const nextBtn = document.getElementById('nextBtn');
+const song = document.getElementById('loveSong');
+
+askBox.addEventListener('click', ()=>{
+  askBox.style.display = 'none';
+  reasonsDiv.style.display = 'block';
+  
+  // Start song
+  song.volume = 0.5;
+  song.play();
+
+  // Add reasons as paragraphs
+  reasons.forEach(text=>{
+    const p = document.createElement('p');
+    p.className = 'reason';
+    p.textContent = text;
+    reasonsDiv.appendChild(p);
+  });
+
+  // Animate them one by one
+  const reasonElements = document.querySelectorAll('.reason');
+  reasonElements.forEach((el,i)=>{
+    setTimeout(()=>{
+      el.style.opacity = 1;
+      if(i === reasonElements.length -1){
+        nextBtn.style.opacity = 1;
+      }
+    }, i*400);
+  });
+});
+
+// Next button click → next page
+nextBtn.addEventListener('click', ()=>{
+  window.location.href = "page9.html"; // change to your next page
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Your Final Surprise ❤️</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:linear-gradient(to bottom,#ff758f,#ffb3c6);
+  font-family:'Poppins',sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:auto;
+}
+
+/* HEARTS */
+.hearts span{
+  position:fixed;
+  bottom:-30px;
+  animation:floatHearts 8s linear infinite;
+  pointer-events:none;
+}
+@keyframes floatHearts{
+  from{transform:translateY(0);opacity:1;}
+  to{transform:translateY(-120vh);opacity:0;}
+}
+
+/* CARD */
+.card{
+  background:#fff;
+  width:92%;
+  max-width:420px;
+  padding:22px;
+  border-radius:20px;
+  text-align:center;
+  box-shadow:0 25px 45px rgba(0,0,0,.35);
+}
+
+/* SLIDER */
+input[type=range]{
+  width:100%;
+  margin-top:15px;
+}
+
+.percent{
+  font-size:18px;
+  margin-top:10px;
+  font-weight:600;
+  color:#ff4d6d;
+}
+
+/* VIDEO */
+video{
+  width:100%;
+  max-height:240px;
+  margin-top:15px;
+  border-radius:15px;
+  display:none;
+  object-fit:contain;
+}
+</style>
+</head>
+
+<body>
+
+<div class="hearts"></div>
+
+<div class="card">
+  <h2>❤️ How much you love me?</h2>
+  <p>Pull the meter to unlock the surprise</p>
+
+  <input type="range" min="0" max="100" value="0" id="loveMeter">
+  <div class="percent"><span id="percent">0</span>%</div>
+
+  <video id="vid" controls>
+    <source src="valentine.MOV" type="video/mp4">
+  </video>
+</div>
+
+<script>
+/* HEARTS */
+setInterval(()=>{
+  const h=document.createElement("span");
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=15+Math.random()*25+"px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),8000);
+},450);
+
+const meter=document.getElementById("loveMeter");
+const percent=document.getElementById("percent");
+const video=document.getElementById("vid");
+
+/* SLIDER LOGIC */
+meter.oninput=()=>{
+  percent.innerText=meter.value;
+
+  if(meter.value==100){
+    video.style.display="block";
+    video.play();
+    meter.disabled=true;
+  }
+};
+
+/* AUTO REDIRECT AFTER VIDEO */
+video.onended=()=>{
+  window.location.href="page3.html";
+};
+</script>
+
+</body>
+</html>

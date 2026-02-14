@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Someone Is Missing You ❤️</title>
+
+<style>
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  min-height:100vh;
+  background:linear-gradient(to bottom,#ff4d6d,#ffb3c6);
+  font-family:'Poppins',sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.card{
+  background:#fff;
+  width:92%;
+  max-width:420px;
+  padding:25px;
+  border-radius:25px;
+  text-align:center;
+  box-shadow:0 25px 45px rgba(0,0,0,.35);
+  animation:fade 1s ease;
+}
+@keyframes fade{
+  from{opacity:0;transform:translateY(40px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+h2{color:#ff4d6d;}
+
+button{
+  margin-top:15px;
+  padding:12px 24px;
+  background:#ff4d6d;
+  color:#fff;
+  border:none;
+  border-radius:25px;
+  font-size:15px;
+  cursor:pointer;
+}
+
+.progress{
+  width:100%;
+  height:14px;
+  background:#ffe0e8;
+  border-radius:20px;
+  margin-top:15px;
+  overflow:hidden;
+  display:none;
+}
+.bar{
+  height:100%;
+  width:0%;
+  background:#ff4d6d;
+  transition:width .4s;
+}
+
+video{
+  width:100%;
+  margin-top:18px;
+  border-radius:18px;
+  display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h2>💭 A Small Mystery</h2>
+
+  <p id="text">
+    Someone is missing you a lot… 🥺❤️  
+    <br><br>
+    Do you really want to see who it is?
+  </p>
+
+  <button id="startBtn" onclick="startGame()">
+    Yes… show me 🥹
+  </button>
+
+  <div class="progress" id="progressBox">
+    <div class="bar" id="bar"></div>
+  </div>
+
+  <video id="missVid" controls>
+    <source src="aahan.MP4" type="video/mp4">
+  </video>
+</div>
+
+<script>
+let progress = 0;
+
+function startGame(){
+  document.getElementById("startBtn").style.display="none";
+  document.getElementById("progressBox").style.display="block";
+  document.getElementById("text").innerHTML =
+    "Finding who misses you the most… 💖<br>Please wait…";
+
+  const bar = document.getElementById("bar");
+
+  const interval = setInterval(()=>{
+    progress += 10;
+    bar.style.width = progress + "%";
+
+    if(progress >= 100){
+      clearInterval(interval);
+      unlockVideo();
+    }
+  }, 400);
+}
+
+function unlockVideo(){
+  document.getElementById("text").innerHTML =
+    "Oh my God… 🥹❤️<br>He really misses you…";
+  const v = document.getElementById("missVid");
+  v.style.display = "block";
+  v.play();
+
+  // ➡️ Next page after video
+  v.onended = () => {
+    window.location.href = "page5.html";
+  };
+}
+</script>
+
+</body>
+</html>

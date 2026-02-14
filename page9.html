@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Page 9 - Valentine Proposal ❤️</title>
+<style>
+body {
+  margin: 0; 
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Georgia', serif;
+  background: linear-gradient(to top, #ffb3c6, #ff4d6d);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+  color: #fff;
+  text-align: center;
+}
+
+.message-box {
+  background: rgba(255, 204, 213, 0.9);
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+  max-width: 80%;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.message-box.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.propose-btn, #nextBtn {
+  margin-top: 25px;
+  padding: 12px 25px;
+  font-size: 18px;
+  border: none;
+  border-radius: 15px;
+  background: #ff4d6d;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+.propose-btn:hover, #nextBtn:hover {
+  background: #e60044;
+  transform: scale(1.05);
+}
+
+#videoContainer {
+  margin-top: 20px;
+  width: 90%;
+  max-width: 500px;
+  display: none;
+}
+
+video {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+}
+
+.hearts {
+  position: absolute;
+  inset:0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hearts span{
+  position:absolute;
+  bottom:-20px;
+  color: rgba(255,255,255,0.8);
+  font-size: 20px;
+  animation: floatHearts 6s linear infinite;
+}
+
+@keyframes floatHearts{
+  0% {transform: translateY(0) scale(1); opacity:1;}
+  100% {transform: translateY(-100vh) scale(1.5); opacity:0;}
+}
+</style>
+</head>
+<body>
+
+<div class="hearts"></div>
+
+<div class="message-box" id="messageBox">
+  <h1>❤️ A Special Surprise ❤️</h1>
+  <p>You've always said, "If you like me, why didn’t you ever propose?"</p>
+  <p>So today, on Valentine’s Day… I’m finally going to propose! 💌</p>
+  <button class="propose-btn" id="playSongBtn">Dedicate Song 🎵</button>
+</div>
+
+<div id="videoContainer">
+  <video id="proposalVideo" controls>
+    <source src="hehe.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+<button id="nextBtn" style="display:none;">Go to Page 10 💖</button>
+
+<audio id="proposalSong" src="proposal-song.mp3"></audio>
+
+<script>
+// Floating hearts
+const heartsContainer = document.querySelector('.hearts');
+setInterval(() => {
+  const heart = document.createElement('span');
+  heart.innerHTML = '❤️';
+  heart.style.left = Math.random() * 100 + 'vw';
+  heart.style.fontSize = 15 + Math.random()*25 + 'px';
+  heartsContainer.appendChild(heart);
+  setTimeout(()=>heart.remove(), 6000);
+}, 300);
+
+// Fade-in message
+window.addEventListener('load', () => {
+  const box = document.getElementById('messageBox');
+  setTimeout(() => box.classList.add('show'), 500);
+});
+
+// Play song and show video
+const songBtn = document.getElementById('playSongBtn');
+const song = document.getElementById('proposalSong');
+const videoContainer = document.getElementById('videoContainer');
+const nextBtn = document.getElementById('nextBtn');
+
+songBtn.addEventListener('click', ()=>{
+  song.volume = 0.6;
+  song.play();
+  songBtn.innerText = "Playing 🎶 & Video Showing";
+  songBtn.disabled = true;
+
+  // Show your video
+  videoContainer.style.display = "block";
+
+  // Show Next button after small delay
+  setTimeout(()=>nextBtn.style.display='inline-block', 1000);
+});
+
+// Next button click → Page 10
+nextBtn.addEventListener('click', ()=>{
+  window.location.href = "page10.html"; // replace with actual next page
+});
+</script>
+
+</body>
+</html>

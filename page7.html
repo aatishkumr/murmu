@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Touch to See My Feelings 💌</title>
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Georgia', serif;
+  overflow: hidden;
+  cursor: pointer;
+  background: linear-gradient(to bottom, #ffccd5, #ffe6e6);
+  position: relative;
+}
+
+/* Floating overlay box */
+.touch-box {
+  position: absolute;
+  width: 250px;
+  height: 80px;
+  background: rgba(255, 204, 213, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: #b33a6c;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 15px;
+  transition: top 0.3s ease, left 0.3s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Letter card */
+.letter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff7f0;
+  padding: 50px 40px;
+  border-radius: 15px;
+  font-size: 24px;
+  line-height: 2.3;
+  letter-spacing: 1.2px;
+  color: #4b2e2e;
+  max-width: 90%;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 1.5s ease;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.2);
+  text-align: left;
+}
+
+.letter.show {
+  max-height: 4000px;
+}
+
+.letter p {
+  opacity: 0;
+  margin-bottom: 1.8em;
+  transition: opacity 0.5s;
+}
+
+/* Next button */
+#nextBtn{
+  display:none;
+  position:absolute;
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%);
+  padding:12px 25px;
+  font-size:18px;
+  border:none;
+  border-radius:15px;
+  background:#ff4d6d;
+  color:white;
+  cursor:pointer;
+}
+#nextBtn:hover{
+  background:#e60044;
+}
+</style>
+</head>
+<body>
+
+<!-- Overlay touch box -->
+<div class="touch-box" id="touchBox">
+  Tap here to see the message 💖
+</div>
+
+<!-- Letter container -->
+<div class="letter" id="letter"></div>
+
+<!-- Next button -->
+<button id="nextBtn">Next ❤️</button>
+
+<!-- Audio -->
+<audio id="song" src="i.mp4"></audio>
+
+<script>
+const letter = document.getElementById('letter');
+const song = document.getElementById('song');
+const touchBox = document.getElementById('touchBox');
+const nextBtn = document.getElementById('nextBtn');
+
+const text = `
+Hey Love ❤️
+
+POV — It’s 14 February ❤️
+
+Pyaar shayad woh nahi hota jo roz “I love you” kehne se prove hota hai…  
+Real love shayad woh hota hai, jo silence mein bhi ek dusre ko chhodne nahi deta…  
+Jahan baatein kam ho jaati hain, par connection kabhi kam nahi hota… 🤍
+
+Love woh nahi jo hum duniya ko stories aur posts mein dikhate hain…  
+Love woh hai jo hum quietly feel karte hain…  
+
+In late night thoughts, in random smiles, in that one name jo bina wajah dil ko sukoon de deta hai… ✨
+
+Aap meri life ka most beautiful part isliye nahi ho kyunki you are perfect…  
+Balki isliye, kyunki aapke saath main apna real self ho sakta hoon…  
+No filters, no acting…  
+Sirf main — jaisa main sach mein hoon. 💫
+
+Aap meri aadat nahi ho, kyunki habits change ho jaati hain…  
+Aap meri zaroorat bhi nahi ho, kyunki needs kabhi na kabhi khatam ho jaati hain…  
+Aap meri woh chahat ho…  
+Jo waqt ke saath kam nahi, aur gehri hoti ja rahi hai… ❤️‍🩹
+
+I’m not scared of losing you…  
+Main darta hoon aapke bina khud ko kho dene se…  
+Because you are not just someone I love…  
+You’ve slowly become a part of my identity… 🫶
+
+Main aapko paane ka nahi…  
+Aapko lifetime nibhaane ka dream dekhta hoon…  
+Because real love sirf happy moments mein nahi,  
+Balki responsibilities mein grow karta hai… 🌙
+
+If love had a feeling…  
+Toh aap woh peace ho, jahan mera har darr aakar khud hi chup ho jaata hai…  
+Like after a long tiring day, finally finding rest… 🤍
+
+Kabhi kabhi sochta hoon…  
+Agar life humein different paths pe le bhi jaaye…  
+Toh bhi mera ek hissa hamesha aapke paas hi rahega…  
+Like a prayer that never really fades away… 🕊️
+
+Aapke saath bitaaye hue chhote chhote moments…  
+Random calls, stupid talks, silent understandings…  
+Yeh sab meri life ke woh chapters ban chuke hain,  
+Jo main kabhi skip nahi karna chahta… ✨
+
+And if life ever asks —  
+“What was the most beautiful thing you ever had?”  
+I’ll say without even thinking…  
+You.  
+And the love that grew in silence… ❤️
+
+Aaj main aapse koi big promise nahi karta…  
+I don’t promise forever…  
+Bas itna kehna chahta hoon —  
+
+Aap meri zindagi ka sabse beautiful feeling ho…  
+Jise words se nahi…  
+Sirf dil samajhta h ✨
+`;
+
+// Convert text into paragraphs
+const paragraphs = text.trim().split('\n\n');
+paragraphs.forEach(p=>{
+  const para = document.createElement('p');
+  para.textContent = p.trim();
+  letter.appendChild(para);
+});
+
+// Function to move touch-box randomly
+function moveRandomly() {
+  const maxX = window.innerWidth - touchBox.offsetWidth - 20;
+  const maxY = window.innerHeight - touchBox.offsetHeight - 20;
+  const randomX = Math.floor(Math.random() * maxX);
+  const randomY = Math.floor(Math.random() * maxY);
+  touchBox.style.left = randomX + 'px';
+  touchBox.style.top = randomY + 'px';
+}
+
+let taps = 0;
+const maxTaps = 10; // number of jumps before showing the message
+
+touchBox.addEventListener('click', ()=>{
+  taps++;
+  if(taps < maxTaps){
+    moveRandomly();
+  } else {
+    // Final tap: show letter
+    touchBox.style.display = 'none';
+    letter.classList.add('show');
+    song.play();
+
+    // Reveal paragraphs one by one
+    paragraphs.forEach((p,i)=>{
+      setTimeout(()=>{
+        letter.children[i].style.opacity = 1;
+        // Show next button after last paragraph
+        if(i === paragraphs.length - 1){
+          nextBtn.style.display = 'block';
+        }
+      }, i*250);
+    });
+  }
+});
+
+// Start with random position
+moveRandomly();
+
+// Next button click → go to page8
+nextBtn.addEventListener('click', ()=>{
+  window.location.href = "page8.html"; // Change to your Page 8 file
+});
+</script>
+
+</body>
+</html>

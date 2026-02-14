@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Valentine 💖</title>
+<style>
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  height:100vh;
+  width:100vw;
+  font-family:'Georgia', serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  background: linear-gradient(to bottom, #ffe6e6, #ffccd5);
+  overflow:hidden;
+}
+
+/* Floating hearts animation */
+.hearts span{
+  position:absolute;
+  bottom:-20px;
+  color:rgba(255,0,100,0.8);
+  animation:floatHearts 8s linear infinite;
+}
+@keyframes floatHearts{
+  0%{transform:translateY(0) scale(1);opacity:1;}
+  100%{transform:translateY(-100vh) scale(1.5);opacity:0;}
+}
+
+/* Greeting container */
+.greeting{
+  background: #fff7f0;
+  padding: 40px 30px;
+  border-radius: 20px;
+  text-align:center;
+  max-width: 500px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  font-size: 20px;
+  line-height: 1.8;
+  color: #4b2e2e;
+  position: relative;
+  z-index:1;
+}
+
+/* Professional heading */
+.greeting h1{
+  font-size: 32px;
+  margin-bottom: 15px;
+  color:#ff4d6d;
+}
+
+/* Optional video styling */
+.greeting video{
+  width:100%;
+  border-radius: 15px;
+  margin-top:20px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* Button for next */
+.next-btn{
+  margin-top:20px;
+  padding:12px 25px;
+  background:#ff4d6d;
+  color:white;
+  border:none;
+  border-radius:15px;
+  font-size:18px;
+  cursor:pointer;
+  transition: background 0.3s;
+}
+.next-btn:hover{
+  background:#e60044;
+}
+</style>
+</head>
+<body>
+
+<!-- Floating hearts -->
+<div class="hearts"></div>
+
+<!-- Greeting message -->
+<div class="greeting">
+  <h1>Happy Valentine 💖</h1>
+  <p>
+    Babe, that's it — that's all the effort I wanted to put in,  
+    just to make you feel special.  
+    Thank you for coming into my life and making every day brighter.  
+  </p>
+  <p>
+    Today, I just want to tell you how much you mean to me.  
+    You are my cute, sweet, and amazing girlfriend.  
+    Happy Valentine’s Day, my love! ❤️
+  </p>
+
+
+<script>
+/* Floating hearts generation */
+const heartsContainer=document.querySelector('.hearts');
+setInterval(()=>{
+  const heart=document.createElement('span');
+  heart.innerHTML='❤️';
+  heart.style.left=Math.random()*100+'vw';
+  heart.style.fontSize=15+Math.random()*25+'px';
+  heartsContainer.appendChild(heart);
+  setTimeout(()=>heart.remove(),8000);
+},400);
+
+/* Next button redirects to another page if needed */
+function goNextPage(){
+  window.location.href = "page10.html"; // Change to your next page if any
+}
+</script>
+
+</body>
+</html>
